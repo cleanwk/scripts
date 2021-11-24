@@ -1,6 +1,8 @@
 #封装常用操作，提高效率
 ARG=$1
 REMOTE_ADDRESS=$2
+LOCAL_TIME="`date +%Y-%m-%d,%H:%m:%s`"
+
 
 git_operation() {
     #绿色字
@@ -28,6 +30,26 @@ git_init() {
     #绿色字体
     echo "\033[32m ------>>>  init repo && push to your repo successfully! \033[0m"
 }
+
+---
+title: brew 常用命令
+date: 2021-11-07 15:39:35
+tags: [工具使用,常用命令]
+---
+## 
+hexo_new(){
+     #绿色字
+    echo "\033[32m ------>>>  enter you file name & tags: \n \033[0m"
+    read filename tags
+    echo "---
+        title: ${filename}
+        date: ${LOCAL_TIME}
+        tags: [${tags}]
+    ---" >> ~/Desktop/hexo_blog/source/_posts/${filename}.md
+    echo "\033[32m ------>>>  ${filename}.md create successfully!: \n \033[0m"
+    sleep 2
+    open ~/Desktop/hexo_blog/source/_posts/${filename}.md 
+}
 #*********************************main task ************************************
 
 case $ARG in
@@ -44,6 +66,12 @@ case $ARG in
     ;;
 '--initrepo')
     git_init
+    ;;
+'-hn')
+    hexo_new
+    ;;
+'--hexonew')
+    hexo_new
     ;;
 *)
     #红色字体
